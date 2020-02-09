@@ -1,6 +1,6 @@
 <div *ngFor="let actor of actorList">
     <h2>
-        {{ actor.name }}
+        <a routerLink = "/actor/{{actor.actorid}}">{{ actor.name }} </a>
     </h2>
     <p>
         {{ actor.photo }}

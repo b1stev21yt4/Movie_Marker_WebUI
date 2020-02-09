@@ -1,1 +1,15 @@
 <p>actor-detail works!</p>
+<h1>
+    {{ actor.name }}
+</h1>
+<img [src]="actor.photo">
+<hr>
+<div *ngFor="let movie of movieList">
+    <h2>
+        {{ movie.title }}
+    </h2>
+    <p>
+        {{ movie.year }}
+    </p>
+<img [src]="movie.poster">    
+</div>

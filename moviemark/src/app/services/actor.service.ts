@@ -9,6 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class ActorService{
     private getActorListUrl = '/backend/actors';
+    private getActorUrl = '/backend/actor/';
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,6 +26,13 @@ export class ActorService{
             );
     }
 
+    getActor (actor_id : string): Observable<Actor>{
+        return this.http.get<Actor>(this.getActorUrl + actor_id)
+            .pipe(
+                catchError(this.handleError<Actor>('getActor', null))
+            );
+    }
+
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
   
@@ -32,6 +40,8 @@ export class ActorService{
             return of(result as T);
 
         };
+    
+        
     }
 
 

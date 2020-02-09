@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class MovieService{
     private getMovieListUrl = '/backend/movies';
-
+    private getMoviebyActorUrl = '/backend/moviesbyactor/';
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -25,6 +25,12 @@ export class MovieService{
             );
     }
 
+    getRelatedMovie (actor_id : string): Observable<Movie[]>{
+        return this.http.get<Movie[]>(this.getMoviebyActorUrl + actor_id)
+        .pipe(
+            catchError(this.handleError<Movie[]>('getRelatedMovie', []))
+        );        
+    }
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
   
